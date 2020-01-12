@@ -107,7 +107,15 @@ def find_start_end(grid):
         end:   <int>   destination block index in the list
     """
     #------------------------------------
+    start = 0
+    end = 0
+    for ind, block_type in enumerate(grid):
+        if block_type == 'emerald_block':
+            start = ind
+        elif block_type == 'redstone_block':
+            end = ind
 
+    return (start, end)
     #-------------------------------------
 
 def extract_action_list_from_path(path_list):
