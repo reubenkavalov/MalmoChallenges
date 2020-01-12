@@ -154,7 +154,62 @@ def dijkstra_shortest_path(grid_obs, source, dest):
         path_list:  <list>  block indexes representing a path from source (first element) to destination (last)
     """
     #------------------------------------
+    goal_found = False
+    delta = [1, -1, 21, -21]
+    cost = 1
+    possible_nodes = [0 for i in grid_obs]
+    possible_nodes[source] = 5
+    g_value = 0
+    frontier_nodes = [(g_value, source)]
+    parent_node = {}  # Dictionary that Maps {child node : parent node}
+    loopcount = 0
+    while len(frontier_nodes) != 0:
+        frontier_nodes.sort(reverse=True)
+        current_node = frontier_nodes.pop()
 
+        if current_node[1] == dest:
+            goal_found = True
+            break
+        g_value, node_index = current_node
+
+        for i in delta:
+            possible_expansion = node_index + i
+            if grid_obs[possible_expansion] != "air":
+                try:
+                    unsearched_node = possible_nodes[possible_expansion] == 0
+                    open_node = grid_obs[possible_expansion] == 'diamond_block' or 'redstone_block'
+                except:
+                    unsearched_node = False
+                    open_node = False
+                if unsearched_node and open_node:
+                    possible_nodes[possible_expansion] = 3
+                    possible_node = (g_value + cost, possible_expansion)
+                    frontier_nodes.append(possible_node)
+
+                    parent_node[possible_node] = current_node
+        loopcount += 1
+
+    if goal_found == True:
+        route = []
+        child_node = current_node
+        while child_node in parent_node:
+            route.append(parent_node[child_node])
+            child_node = parent_node[child_node]
+            route.sort()
+
+        path = []
+        position = [source]
+
+        for i in range(0, len(route)):
+            position = [route[i][1]]
+            path.append(position)
+
+        position = [dest]
+        path.append(position)
+        return path
+
+    else:
+        return Falseg
     #-------------------------------------
 
 # Create default Malmo objects:
