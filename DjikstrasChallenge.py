@@ -1,5 +1,3 @@
-# Tutorial sample #7: The Maze Decorator
-
 try:
     from malmo import MalmoPython
 except:
@@ -10,8 +8,6 @@ import sys
 import math
 import time
 import json
-
-# sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)  # flush print output immediately
 
 def GetMissionXML(seed, gp, size=10):
     return '''<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
