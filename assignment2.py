@@ -12,6 +12,7 @@ except:
     import MalmoPython
 import os
 import random
+import operator
 import sys
 import time
 import json
