@@ -12,7 +12,9 @@ def is_solution(reward):
     return reward == 0
 
 def get_curr_state(items):
-    return len(items)
+    state_dict = {k: v for k, v in sorted(items, key=lambda item: item[1])}
+    state = tuple(state_dict.items())
+    return state
 
 def choose_action(curr_state, possible_actions, eps, q_table):
     rnd = random.random()

@@ -362,6 +362,7 @@ class Odie(object):
         next_a = ""
         while next_a != "present_gift":
             curr_state = self.get_curr_state()
+
             possible_actions = self.get_possible_actions(agent_host, is_first_action)
             next_a = self.choose_action(curr_state, possible_actions, 0)
             policy.append(next_a)
@@ -378,6 +379,7 @@ class Odie(object):
         done_update = False
         while not done_update:
             s0 = self.get_curr_state()
+            # print(s0)
             possible_actions = self.get_possible_actions(agent_host, True)
             a0 = self.choose_action(s0, possible_actions, self.epsilon)
             S.append(s0)
