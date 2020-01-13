@@ -6,7 +6,10 @@ Author: Moshe Lichman and Sameer Singh
 from __future__ import division
 import numpy as np
 
-import MalmoPython
+try:
+    from malmo import MalmoPython
+except:
+    import MalmoPython
 import os
 import random
 import sys
