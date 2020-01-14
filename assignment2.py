@@ -122,7 +122,7 @@ def GetMissionXML(summary):
 
 
 class Odie(object):
-    def __init__(self, alpha=0.3, gamma=1, n=1):
+    def __init__(self, alpha=0.3, gamma=0.75, n=1):
         """Constructing an RL agent.
 
         Args
@@ -130,7 +130,7 @@ class Odie(object):
             gamma:  <float>  value decay rate   (default = 1)
             n:      <int>    number of back steps to update (default = 1)
         """
-        self.epsilon = 0.2  # chance of taking a random action instead of the best
+        self.epsilon = 0.3  # chance of taking a random action instead of the best
         self.q_table = {}
         self.n, self.alpha, self.gamma = n, alpha, gamma
         self.inventory = defaultdict(lambda: 0, {})
