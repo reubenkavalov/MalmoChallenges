@@ -1,7 +1,7 @@
 import random
 import operator
 
-items=['pumpkin', 'sugar', 'egg', 'egg', 'red_mushroom', 'planks', 'planks']
+items = ['pumpkin', 'sugar', 'egg', 'egg', 'red_mushroom', 'planks', 'planks']
 
 food_recipes = {'pumpkin_pie': ['pumpkin', 'egg', 'sugar'],
                 'pumpkin_seeds': ['pumpkin'],
@@ -14,7 +14,7 @@ rewards_map = {'pumpkin': -5, 'egg': -25, 'sugar': -10,
 
 
 def is_solution(reward):
-    return reward == 200
+    return reward == 197
 
 
 def get_curr_state(items):
@@ -26,14 +26,14 @@ def get_curr_state(items):
 def choose_action(curr_state, possible_actions, eps, q_table):
     rnd = random.random()
     if rnd < eps:
-        print('Random Action')
+        print("Random action: ")
         action = random.choice(possible_actions)
     else:
         possible_q_values = q_table[curr_state].items()
         biggest_q_action = max(possible_q_values, key=operator.itemgetter(1))[0]
         y = q_table[curr_state][biggest_q_action]
         x = biggest_q_action
-        biggest_q_dict = {x:y}
+        biggest_q_dict = {x: y}
         for action, q_value in possible_q_values:
             if q_value == y:
                 biggest_q_dict[action] = q_value

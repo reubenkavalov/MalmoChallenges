@@ -122,7 +122,7 @@ def GetMissionXML(summary):
 
 
 class Odie(object):
-    def __init__(self, alpha=0.3, gamma=0.75, n=1):
+    def __init__(self, alpha=0.3, gamma=0.95, n=5):
         """Constructing an RL agent.
 
         Args
@@ -130,7 +130,8 @@ class Odie(object):
             gamma:  <float>  value decay rate   (default = 1)
             n:      <int>    number of back steps to update (default = 1)
         """
-        self.epsilon = 0.3  # chance of taking a random action instead of the best
+
+        self.epsilon = .4  # chance of taking a random action instead of the best
         self.q_table = {}
         self.n, self.alpha, self.gamma = n, alpha, gamma
         self.inventory = defaultdict(lambda: 0, {})
@@ -386,6 +387,11 @@ class Odie(object):
             S.append(s0)
             A.append(a0)
             R.append(0)
+            # if self.epsilon > 0.2:
+            #     self.epsilon *= 0.999
+            # else:
+            #     self.epsilon = 0.2
+
 
             T = sys.maxsize
             for t in range(sys.maxsize):
@@ -469,14 +475,14 @@ if __name__ == '__main__':
 
         # Every few iteration Odie will show us the best policy that he learned.
         if (iRepeat + 1) % 5 == 0:
-            print((iRepeat+1), 'Showing best policy:', end = " ")
+            print((iRepeat+1), 'Showing best policy:', end=" ")
             found_solution = odie.best_policy(agent_host)
             if found_solution:
                 print('Found solution')
                 print('Done')
                 break
         else:
-            print((iRepeat+1), 'Learning Q-Table:', end = " ")
+            print((iRepeat+1), 'Learning Q-Table | Epsilon %.3f:'%(odie.epsilon), end=" ")
             odie.run(agent_host)
 
         odie.clear_inventory()
